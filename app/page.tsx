@@ -1,113 +1,170 @@
-import Image from 'next/image'
+'use client';
 
-export default function Home() {
+import React, { useEffect, useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
+import Image from 'next/image';
+import { Rubik_Mono_One } from 'next/font/google';
+
+const rubikMonoOne = Rubik_Mono_One({
+  weight: ['400'],
+  style: ['normal'],
+  subsets: ['latin'],
+  variable: '--font-rubik-mono-one',
+});
+
+const style = {
+  textShadow:
+    '0 0 2px #483E6B, 0 0 2px #483E6B, 0 0 2px #483E6B, 0 0 2px #483E6B, 0 0 2px #483E6B',
+};
+
+const PinDemo = () => {
+  const [pin, setPin] = useState<number | null>(null);
+
+  const qrCodeUrl = () => {
+    const _pin = pin ? pin : '';
+    return process.env.NODE_ENV === 'production'
+      ? `https://xmtp.link/poap-test.eth?pin=${_pin}`
+      : `http://localhost:4322/poap-test.eth?pin=${_pin}`;
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="bg-[#FDF3FE] w-full">
+      <div className="flex flex-col sm:flex-row sm:justify-center h-screen py-[32px] sm:gap-3 sm:min-w-[600px]">
+        {/* Left side */}
+        <div className="flex flex-col sm:w-2/6">
+          <div className="mx-auto p-20">
+            <Image src="/eth-denver-2022.png" alt="" width={340} height={340} />
+          </div>
+
+          <div className="flex flex-row justify-between px-8 mt-[36px] sm:min-w-[600px]">
+            <Image src="/ethdenver.svg" alt="" width={110} height={80} />
+            <div className={`flex flex-col ${rubikMonoOne.className} mt-4`}>
+              <div>
+                <p className="text-[#483E6B] text-4xl">Get the</p>
+                <p
+                  className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                  style={style}
+                >
+                  Get the
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <p className="text-[#483E6B] text-4xl">Official POAP</p>
+                <p
+                  className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                  style={style}
+                >
+                  Official POAP
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right side */}
+        <div className="flex flex-col sm:w-2/6">
+          <div className="bg-white rounded-[20px] mx-auto p-20">
+            <QRCodeSVG value={qrCodeUrl()} size={340} />
+          </div>
+
+          <CodeDisplayComponent pin={pin} setPin={setPin} />
         </div>
       </div>
+    </div>
+  );
+};
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+export default PinDemo;
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+interface CodeDisplayProps {
+  pin: number | null;
+  setPin: React.Dispatch<React.SetStateAction<number | null>>;
 }
+
+const CodeDisplayComponent = (props: CodeDisplayProps) => {
+  const { pin, setPin } = props;
+
+  const [error, setError] = useState<string | null>(null);
+
+  const getPinUrl =
+    process.env.NODE_ENV === 'production'
+      ? 'https://xmtp-pin-server.vercel.app/getPIN'
+      : 'http://localhost:3002/getPIN';
+
+  useEffect(() => {
+    // Function to fetch the code from the API
+    const fetchCode = async () => {
+      try {
+        const response = await fetch(getPinUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            secret: 'test001',
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const { pin } = data;
+
+        setPin(parseInt(pin));
+        setError(null);
+      } catch (error) {
+        console.error('Error fetching code:', error);
+        setError('Failed to fetch code');
+      }
+    };
+
+    // Initial fetch when the component mounts
+    fetchCode();
+
+    // Set up an interval to fetch the code every 15 seconds
+    const intervalId = setInterval(fetchCode, 15000);
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array ensures this effect runs only once when the component mounts
+
+  return error ? (
+    <p className="text-black">Error: {error}</p>
+  ) : (
+    <div className="flex flex-col">
+      <div className="bg-white p-6 rounded-[20px] flex flex-row mt-8 mx-[50px] gap-5 justify-center items-center">
+        <div>
+          <Image src="/wallet.svg" alt="" width={60} height={60} />
+        </div>
+        <div /> {/* Spacer */}
+        <p className={`${rubikMonoOne.className} text-[#3C3259] text-[50px]`}>
+          {pin}
+        </p>
+        <p
+          className={`${rubikMonoOne.className} text-[#5F58AA] text-[28px] uppercase`}
+        >
+          <span>poap</span>
+          <span className="ml-3">pin</span>
+        </p>
+        <div /> {/* Spacer */}
+      </div>
+
+      <div className="flex justify-center items-center gap-x-2">
+        <span className="mt-1">
+          <Image src="/star.svg" alt="" width={24} height={24} />
+        </span>
+
+        <p className={`font-semibold text-center text-[#5F59A6] mt-3`}>
+          Use this to claim your POAP
+        </p>
+
+        <span className="mt-1">
+          <Image src="/star.svg" alt="" width={24} height={24} />
+        </span>
+      </div>
+    </div>
+  );
+};
