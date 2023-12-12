@@ -37,27 +37,49 @@ const PinDemo = () => {
             <Image src="/eth-denver-2022.png" alt="" width={340} height={340} />
           </div>
 
-          <div className="flex flex-row justify-between px-8 mx-auto mt-[36px] sm:min-w-[600px]">
+          <div className="flex flex-row px-8 mx-auto mt-[24px] sm:min-w-[600px]">
             <Image src="/ethdenver.svg" alt="" width={110} height={80} />
-            <div className={`flex flex-col ${rubikMonoOne.className} mt-4`}>
-              <div>
-                <p className="text-[#483E6B] text-4xl">Get the</p>
-                <p
-                  className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
-                  style={style}
-                >
-                  Get the
-                </p>
-              </div>
 
-              <div className="mt-4">
-                <p className="text-[#483E6B] text-4xl">Official POAP</p>
-                <p
-                  className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
-                  style={style}
-                >
-                  Official POAP
-                </p>
+            <div className="flex items-start">
+              <Image
+                src="/ethdenver.svg"
+                alt=""
+                width={90}
+                height={80}
+                className="opacity-0"
+              />
+              <div
+                className={`flex flex-col ${rubikMonoOne.className} mt-4 ml-4`}
+              >
+                <div>
+                  <p className="text-[#483E6B] text-4xl">Get the</p>
+                  <p
+                    className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                    style={style}
+                  >
+                    Get the
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <p className="text-[#483E6B] text-4xl">Official</p>
+                  <p
+                    className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                    style={style}
+                  >
+                    Official
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <p className="text-[#483E6B] text-4xl">POAP</p>
+                  <p
+                    className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                    style={style}
+                  >
+                    POAP
+                  </p>
+                </div>
               </div>
             </div>
           </div>
