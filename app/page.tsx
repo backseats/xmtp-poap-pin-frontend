@@ -33,7 +33,10 @@ const PinDemo = () => {
       <div className="flex flex-col sm:flex-row sm:justify-center h-screen py-[32px] sm:gap-3 sm:min-w-[600px]">
         {/* Left side */}
         <div className="flex flex-col sm:w-2/6">
-          <div className="mx-auto p-20">
+          <div
+            className="mx-auto p-20"
+            style={{ width: '500px', height: '500px' }}
+          >
             <Image src="/eth-denver-2022.png" alt="" width={340} height={340} />
           </div>
 
@@ -49,12 +52,12 @@ const PinDemo = () => {
                 className="opacity-0"
               />
               <div
-                className={`flex flex-col ${rubikMonoOne.className} mt-4 ml-4`}
+                className={`flex flex-col text-3xl ${rubikMonoOne.className} mt-4 ml-4`}
               >
                 <div>
-                  <p className="text-[#483E6B] text-4xl">Get the</p>
+                  <p className="text-[#483E6B]">Get the</p>
                   <p
-                    className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                    className="text-[#B5AEF9] -mt-[42px] ml-[5px]"
                     style={style}
                   >
                     Get the
@@ -62,9 +65,9 @@ const PinDemo = () => {
                 </div>
 
                 <div className="mt-4">
-                  <p className="text-[#483E6B] text-4xl">Official</p>
+                  <p className="text-[#483E6B]">Official</p>
                   <p
-                    className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                    className="text-[#B5AEF9] -mt-[42px] ml-[5px]"
                     style={style}
                   >
                     Official
@@ -72,9 +75,9 @@ const PinDemo = () => {
                 </div>
 
                 <div className="mt-4">
-                  <p className="text-[#483E6B] text-4xl">POAP</p>
+                  <p className="text-[#483E6B]">POAP</p>
                   <p
-                    className="text-[#B5AEF9] text-4xl -mt-[42px] ml-[5px]"
+                    className="text-[#B5AEF9] -mt-[42px] ml-[5px]"
                     style={style}
                   >
                     POAP
